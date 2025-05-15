@@ -3,8 +3,19 @@ set -o errexit -o nounset -o pipefail
 
 SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
-BASE=${CHECKTON_DIFF_BASE:-$(git rev-parse main)}
-HEAD=${CHECKTON_DIFF_HEAD:-$(git rev-parse HEAD)}
+case ${CHECKTON_TRIGGERING_EVENT} in
+    "merge_group")
+      export BASE=${CHECKTON_MERGE_GROUP_BASE:-}
+      export HEAD=${CHECKTON_MERGE_GROUP_HEAD:-}
+      echo "EVENT:\"${CHECKTON_TRIGGERING_EVENT}\" ; "BASE:\"${BASE}\" ; HEAD:\"${HEAD}\""
+      ;;
+
+    "pull_request")
+      export BASE=${CHECKTON_DIFF_BASE:-}
+      export HEAD=${CHECKTON_DIFF_HEAD:-}
+      echo "EVENT:\"${CHECKTON_TRIGGERING_EVENT}\" ; "BASE:\"${BASE}\" ; HEAD:\"${HEAD}\""
+      ;;
+*)
 MERGE_BASE=$(git merge-base "$BASE" "$HEAD")
 
 DIFF_ARGS=(--diff-filter=d)

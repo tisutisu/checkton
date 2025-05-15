@@ -3,6 +3,7 @@ set -o errexit -o nounset -o pipefail
 
 SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
+
 if [[ -n "${GITHUB_WORKSPACE:-}" ]]; then
     git config --global --add safe.directory "$GITHUB_WORKSPACE"
 fi
@@ -13,6 +14,7 @@ checkout() {
         return 1
     fi
 }
+
 
 if [[ -n "${CHECKTON_DIFF_HEAD:-}" ]]; then
     current_ref=$(git rev-parse HEAD)

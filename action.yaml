@@ -31,6 +31,18 @@ inputs:
     description: Hash of the latest commit in the Pull Request.
     required: false
     default: ${{ github.event.pull_request.head.sha }}
+  merge-group-base:
+    description: Hash of the merge group's parent commit. This input is used when triggering-event is set to "merge_group".
+    required: false
+    default: ${{ github.event.merge_group.base_sha }}
+  merge-group-head:
+    description: Hash of the merge group commit. This input is used when triggering-event is set to "merge_group".
+    required: false
+    default: ${{ github.event.merge_group.head_sha }}
+  triggering-event:
+    description: The name of the event that triggered the workflow run. Supported values are (merge_group | pull_request | push | manual).
+    required: false
+    default: ${{ github.event_name }}
   fail-on-findings:
     description: >-
       Fail when ShellCheck reports some violations? (May wish to set this to false if you're
@@ -75,6 +87,9 @@ runs:
     CHECKTON_EXCLUDE_REGEX: ${{ inputs.exclude-regex }}
     CHECKTON_DIFF_BASE: ${{ inputs.pull-request-base }}
     CHECKTON_DIFF_HEAD: ${{ inputs.pull-request-head }}
+    CHECKTON_MERGE_GROUP_BASE: ${{ inputs.merge-group-base }}
+    CHECKTON_MERGE_GROUP_HEAD: ${{ inputs.merge-group-head }}
+    CHECKTON_TRIGGERING_EVENT: ${{ inputs.triggering-event }}
     CHECKTON_FAIL_ON_FINDINGS: ${{ inputs.fail-on-findings }}
     CHECKTON_FIND_RENAMES: ${{ inputs.find-renames }}
     CHECKTON_FIND_COPIES: ${{ inputs.find-copies }}
