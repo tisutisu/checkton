@@ -17,7 +17,7 @@ case ${CHECKTON_TRIGGERING_EVENT} in
       ;;
 *)
 MERGE_BASE=$(git merge-base "$BASE" "$HEAD")
-echo "MERGE_BASE:\"${MERGE_BASE}\"
+echo "MERGE_BASE:\"${MERGE_BASE}\""
 
 DIFF_ARGS=(--diff-filter=d)
 if [[ "${CHECKTON_FIND_RENAMES:-}" != "false" ]]; then
