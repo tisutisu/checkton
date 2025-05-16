@@ -3,6 +3,8 @@ set -o errexit -o nounset -o pipefail
 
 SCRIPTDIR=$(dirname "$(realpath "${BASH_SOURCE[0]}")")
 
+echo "CHECKTON_TRIGGERING_EVENT: \"${CHECKTON_TRIGGERING_EVENT}\""
+
 case ${CHECKTON_TRIGGERING_EVENT} in
     "merge_group")
       export BASE=${CHECKTON_MERGE_GROUP_BASE:-}
