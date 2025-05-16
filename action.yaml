@@ -80,7 +80,7 @@ outputs:
 
 runs:
   using: docker
-  image: docker://quay.io/susdas/checkton:mq@sha256:846565c10b031288637021844060e1addbd61f7a052ddf6a6ab3cba0cfceedb3
+  image: docker://quay.io/susdas/checkton:mq
   env:
     CHECKTON_DIFFERENTIAL: ${{ inputs.differential }}
     CHECKTON_INCLUDE_REGEX: ${{ inputs.include-regex }}
