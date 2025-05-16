@@ -15,7 +15,9 @@ case ${CHECKTON_TRIGGERING_EVENT} in
       export HEAD=${CHECKTON_DIFF_HEAD:-}
       echo "EVENT:\"${CHECKTON_TRIGGERING_EVENT}\" ; "BASE:\"${BASE}\" ; HEAD:\"${HEAD}\""
       ;;
-*)
+    *)
+esac
+
 MERGE_BASE=$(git merge-base "$BASE" "$HEAD")
 echo "MERGE_BASE:\"${MERGE_BASE}\""
 
